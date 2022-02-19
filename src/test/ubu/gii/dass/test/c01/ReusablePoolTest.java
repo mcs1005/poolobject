@@ -12,7 +12,7 @@ import org.junit.Test;
 import ubu.gii.dass.c01.ReusablePool;
 
 /**
- * @author alumno
+ * @author Collado Saez Miguel
  *
  */
 public class ReusablePoolTest {
