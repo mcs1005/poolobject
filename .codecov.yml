@@ -2,5 +2,3 @@ coverage:
   round: up
   range: 0..100
   precision: 3
-- name: Codecov
-  uses: codecov/codecov-action@v2.1.0
