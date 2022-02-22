@@ -9,6 +9,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ubu.gii.dass.c01.NotFreeInstanceException;
+import ubu.gii.dass.c01.Reusable;
 import ubu.gii.dass.c01.ReusablePool;
 
 /**
@@ -41,20 +43,38 @@ public class ReusablePoolTest {
 	 */
 	@Test
 	public void testGetInstance() {
-		// fail("Not yet implemented");
-		ReusablePool pool = ReusablePool.getInstance();
-		// no es nulo
+		// No es nulo
 		assertNotNull(pool);
-		// el objeto devuelto es ReusablePool
+		// El objeto devuelto es ReusablePool
 		assertTrue(pool instanceof ReusablePool);
 	}
 
 	/**
 	 * Test method for {@link ubu.gii.dass.c01.ReusablePool#acquireReusable()}.
+	 * @throws NotFreeInstanceException 
 	 */
 	@Test
-	public void testAcquireReusable() {
-		fail("Not yet implemented");
+	public void testAcquireReusable() throws NotFreeInstanceException {
+		Reusable r1 = null, r2 = null, r3 = null;
+		
+		// Hay espacio para 2, (size=2 por defecto en ReusablePool)
+		r1 = pool.acquireReusable();
+		r2 = pool.acquireReusable();
+		
+		assertNotNull(r1);
+		assertTrue(r1 instanceof Reusable);
+		
+		assertNotNull(r2);
+		assertTrue(r2 instanceof Reusable);
+		
+		// Ya no queda espacio libre
+		try {
+			r3 = pool.acquireReusable();
+		} catch (Exception e) {
+		
+			assertTrue(e instanceof NotFreeInstanceException);
+		}
+		
 	}
 
 	/**
