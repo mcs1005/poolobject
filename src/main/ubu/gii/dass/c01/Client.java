@@ -28,7 +28,11 @@ public class Client{
 	  logger.info(r3.util());
 	  
 	  logger.info(r1.util());
-	
+
+	  // Añadido para poder testear este main().
+	  // Es necesario liberar el pool por completo para los otros tests.
+	  pool.releaseReusable(r1);
+	  pool.releaseReusable(r3);
 	}
 
 } 

@@ -9,17 +9,19 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import ubu.gii.dass.c01.Client;
 import ubu.gii.dass.c01.DuplicatedInstanceException;
 import ubu.gii.dass.c01.NotFreeInstanceException;
 import ubu.gii.dass.c01.Reusable;
 import ubu.gii.dass.c01.ReusablePool;
 
 /**
- * @author Collado Saez Miguel y Garcia Molina Joaquin
+ * @author Collado Saez Miguel
+ * @author Garcia Molina Joaquin
  *
  */
 public class ReusablePoolTest {
-	
+
 	private ReusablePool pool;
 	
 
@@ -44,7 +46,6 @@ public class ReusablePoolTest {
 	 */
 	@Test
 	public void testGetInstance() {
-		// fail("Not yet implemented");
 		ReusablePool pool = ReusablePool.getInstance();
 		// no es nulo
 		assertNotNull(pool);
@@ -59,7 +60,6 @@ public class ReusablePoolTest {
 	@Test
 	public void testAcquireReusable() throws NotFreeInstanceException {
 		Reusable r1 = null, r2 = null, r3 = null;
-		ReusablePool pool = ReusablePool.getInstance();	
 
 		// Hay espacio para 2, (size=2 por defecto en ReusablePool)
 		r1 = pool.acquireReusable();
@@ -87,11 +87,9 @@ public class ReusablePoolTest {
 	 */
 	@Test
 	public void testReleaseReusable() throws NotFreeInstanceException, DuplicatedInstanceException {
-		
 		Reusable r1 = null, r2 = null;
 		
 		r1 = pool.acquireReusable();
-		r2 = pool.acquireReusable();
 
 		// Liberamos un reusable
 		pool.releaseReusable(r1);
@@ -102,6 +100,23 @@ public class ReusablePoolTest {
 		} catch (Exception e) {
 			assertTrue(e instanceof DuplicatedInstanceException);
 		}
+	}
+	
+	/**
+	 * Test method for  {@link ubu.gii.dass.c01.Client#main(ubu.gii.dass.c01.Client)}.
+	 * @throws DuplicatedInstanceException 
+	 * @throws NotFreeInstanceException 
+	 */
+	@SuppressWarnings("static-access")
+	@Test
+	public void testClient() throws NotFreeInstanceException, DuplicatedInstanceException {
+		// Test constructor por defecto de Client.
+		Client client = new Client();
+		assertNotNull(client);
+		assertTrue(client instanceof Client);
+		
+		// Test ejecución main().
+		client.main(null);
 	}
 
 }
