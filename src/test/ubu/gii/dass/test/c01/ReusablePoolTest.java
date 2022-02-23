@@ -15,7 +15,7 @@ import ubu.gii.dass.c01.Reusable;
 import ubu.gii.dass.c01.ReusablePool;
 
 /**
- * @author Collado Saez Miguel
+ * @author Collado Saez Miguel y Garcia Molina Joaquin
  *
  */
 public class ReusablePoolTest {
@@ -44,9 +44,11 @@ public class ReusablePoolTest {
 	 */
 	@Test
 	public void testGetInstance() {
-		// No es nulo
+		// fail("Not yet implemented");
+		ReusablePool pool = ReusablePool.getInstance();
+		// no es nulo
 		assertNotNull(pool);
-		// El objeto devuelto es ReusablePool
+		// el objeto devuelto es ReusablePool
 		assertTrue(pool instanceof ReusablePool);
 	}
 
@@ -56,26 +58,12 @@ public class ReusablePoolTest {
 	 */
 	@Test
 	public void testAcquireReusable() throws NotFreeInstanceException {
-		Reusable r1 = null, r2 = null, r3 = null;
+		// fail("Not yet implemented");
+		ReusablePool pool = ReusablePool.getInstance();	
 		
-		// Hay espacio para 2, (size=2 por defecto en ReusablePool)
-		r1 = pool.acquireReusable();
-		r2 = pool.acquireReusable();
+		Reusable r1 = pool.acquireReusable();
 		
-		assertNotNull(r1);
-		assertTrue(r1 instanceof Reusable);
-		
-		assertNotNull(r2);
-		assertTrue(r2 instanceof Reusable);
-		
-		// Ya no queda espacio libre
-		try {
-			r3 = pool.acquireReusable();
-		} catch (Exception e) {
-		
-			assertTrue(e instanceof NotFreeInstanceException);
-		}
-		
+		r1.util();
 	}
 
 	/**
@@ -85,14 +73,15 @@ public class ReusablePoolTest {
 	 */
 	@Test
 	public void testReleaseReusable() throws NotFreeInstanceException, DuplicatedInstanceException {
+		
 		Reusable r1 = null, r2 = null;
 		
 		r1 = pool.acquireReusable();
 		r2 = pool.acquireReusable();
-		
+
 		// Liberamos un reusable
 		pool.releaseReusable(r1);
-		
+
 		// Intentamos liberal un reusable que ya existe en el pool
 		try {
 			pool.releaseReusable(r1);
