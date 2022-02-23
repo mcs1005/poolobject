@@ -58,12 +58,26 @@ public class ReusablePoolTest {
 	 */
 	@Test
 	public void testAcquireReusable() throws NotFreeInstanceException {
-		// fail("Not yet implemented");
+		Reusable r1 = null, r2 = null, r3 = null;
 		ReusablePool pool = ReusablePool.getInstance();	
-		
-		Reusable r1 = pool.acquireReusable();
-		
-		r1.util();
+
+		// Hay espacio para 2, (size=2 por defecto en ReusablePool)
+		r1 = pool.acquireReusable();
+		r2 = pool.acquireReusable();
+
+		assertNotNull(r1);
+		assertTrue(r1 instanceof Reusable);
+
+		assertNotNull(r2);
+		assertTrue(r2 instanceof Reusable);
+
+		// Ya no queda espacio libre
+		try {
+			r3 = pool.acquireReusable();
+		} catch (Exception e) {
+
+			assertTrue(e instanceof NotFreeInstanceException);
+		}
 	}
 
 	/**
