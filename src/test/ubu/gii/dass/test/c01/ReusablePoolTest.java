@@ -115,7 +115,7 @@ public class ReusablePoolTest {
 		assertNotNull(client);
 		assertTrue(client instanceof Client);
 		
-		// Test ejecución main().
+		// Test ejecucion main().
 		client.main(null);
 	}
 
